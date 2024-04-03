@@ -1,0 +1,18 @@
+stages:
+  - build
+  - deploy
+
+default:
+  tags:
+    - pet
+
+build-job:
+  stage: build
+  script: "mvn compile"
+
+deploy-prod:
+  stage: deploy
+  script: 
+  - "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
+  - "apache-tomcat-9.0.87/bin/catalina.sh"
+  - "run"
