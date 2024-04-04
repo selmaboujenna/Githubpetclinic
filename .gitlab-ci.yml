@@ -17,7 +17,6 @@ move-job:
   script: "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
 
 execute-job:
-  execute-job:
   stage: execute
   script: "apache-tomcat-9.0.87/bin/catalina.sh"
 
