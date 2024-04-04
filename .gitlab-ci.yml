@@ -11,12 +11,18 @@ build-job:
   stage: build
   script: "mvn package"
   artifacts:
+    name: "petclinic" 
     paths:
-      - "petclinic.war"    
+      - "target/*.war"    
 
 move-job:
   stage: move
-  script: "mv petclinic.war /opt/tomcat/webapps"
+  artifacts:
+    name: "petclinic"
+    path: 
+     - "target/*.war" 
+  script: "cp target/petclinic.war /opt/tomcat/webapps"
+    
 
 deploy-prod:
   stage: deploy
