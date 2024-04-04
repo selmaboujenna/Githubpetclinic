@@ -13,12 +13,14 @@ build-job:
   script: "mvn package"
 
 move-job:
- - "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
+  stage: move
+  script: "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
 
 execute-job:
-  - "apache-tomcat-9.0.87/bin/catalina.sh"
+  execute-job:
+  stage: execute
+  script: "apache-tomcat-9.0.87/bin/catalina.sh"
 
 deploy-prod:
   stage: deploy
-  script: 
-  - "run"
+  script: "run"
