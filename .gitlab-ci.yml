@@ -10,10 +10,13 @@ default:
 build-job:
   stage: build
   script: "mvn package"
+  artifacts:
+    paths:
+      - "petclinic.war"    
 
 move-job:
   stage: move
-  script: "cp target/petclinic.war /opt/tomcat/webapps"
+  script: "cp petclinic.war /opt/tomcat/webapps"
 
 deploy-prod:
   stage: deploy
