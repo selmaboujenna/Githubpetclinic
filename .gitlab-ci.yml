@@ -1,7 +1,6 @@
 stages:
   - build
   - move
-  - execute
   - deploy
 
 default:
@@ -16,10 +15,6 @@ move-job:
   stage: move
   script: "cp target/petclinic.war /opt/tomcat/webapps"
 
-execute-job:
-  stage: execute
-  script: "/opt/tomcat/bin/catalina.sh"
-
 deploy-prod:
   stage: deploy
-  script: "run"
+  script: "/opt/tomcat/bin/catalina.sh" "run"
