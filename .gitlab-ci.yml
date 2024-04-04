@@ -19,7 +19,7 @@ move-job:
   stage: move
   artifacts:
     name: "petclinic"
-    path: 
+    paths: 
      - "target/*.war" 
   script: "cp target/petclinic.war /opt/tomcat/webapps"
     
