@@ -17,4 +17,4 @@ move-job:
 
 deploy-prod:
   stage: deploy
-  script: "start"
+  script: "./catalina.sh run"
