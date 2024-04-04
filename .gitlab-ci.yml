@@ -13,7 +13,7 @@ build-job:
   script: "mvn package"
 
 move-job:
- - push"cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
+ - "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
 
 execute-job:
   - "apache-tomcat-9.0.87/bin/catalina.sh"
