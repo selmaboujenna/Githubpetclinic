@@ -17,6 +17,4 @@ move-job:
 
 deploy-prod:
   stage: deploy
-  script: 
-    - "/opt/tomcat/bin/catalina.sh" 
-    - "run"
+  script: "start"
