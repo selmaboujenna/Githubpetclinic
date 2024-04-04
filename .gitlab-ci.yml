@@ -14,7 +14,7 @@ build-job:
 
 move-job:
   stage: move
-  script: "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
+  script: "cp target/petclinic.war /apache-tomcat-9.0.87/webapps"
 
 execute-job:
   stage: execute
