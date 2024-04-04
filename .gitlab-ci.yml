@@ -16,7 +16,7 @@ build-job:
 
 move-job:
   stage: move
-  script: "cp petclinic.war /opt/tomcat/webapps"
+  script: "mv /opt/tomcat/webapps"
 
 deploy-prod:
   stage: deploy
