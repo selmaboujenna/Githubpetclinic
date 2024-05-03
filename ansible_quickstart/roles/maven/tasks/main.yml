@@ -1,0 +1,5 @@
+- name: Install maven
+  community.general.zypper:
+    name: maven
+    state: latest
+    update_cache: true

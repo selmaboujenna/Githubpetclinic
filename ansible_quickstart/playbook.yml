@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  become: true
+  roles: 
+  # - docker
+  # - ansible
+  # - maven
+  # - tomcat
+  # - gitlab
+  # - jmeter
+  # - selenium
+  # - terraform
+    - github-runner
+    
+    
+
+    

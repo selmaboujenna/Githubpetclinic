@@ -1,0 +1,4 @@
+- name: install aptitude
+  community.general.zypper:
+    name: zypper-aptitude
+    state: present

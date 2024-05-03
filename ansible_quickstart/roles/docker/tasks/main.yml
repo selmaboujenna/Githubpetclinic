@@ -1,0 +1,5 @@
+- name: Install docker
+  community.general.zypper: 
+    name: docker
+    state: latest
+    update_cache: true
