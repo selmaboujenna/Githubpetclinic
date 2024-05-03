@@ -1,7 +1,6 @@
 stages:
   - build
   - move
-  - execute
   - deploy
 
 default:
@@ -11,14 +10,20 @@ default:
 build-job:
   stage: build
   script: "mvn package"
+  artifacts:
+    name: "petclinic" 
+    paths:
+      - "target/*.war"    
 
 move-job:
- - "cp /target/petclinic.war /apache-tomcat-9.0.87/webapps"
-
-execute-job:
-  - "apache-tomcat-9.0.87/bin/catalina.sh"
+  stage: move
+  artifacts:
+    name: "petclinic"
+    paths: 
+     - "target/*.war" 
+  script: "cp target/petclinic.war /opt/tomcat/webapps"
+    
 
 deploy-prod:
   stage: deploy
-  script: 
-  - "run"
+  script: "/opt/tomcat/bin/catalina.sh run"

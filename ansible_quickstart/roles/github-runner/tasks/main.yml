@@ -1,0 +1,11 @@
+- name: download github runner
+  command: curl -o actions-runner-linux-x64-2.316.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
+
+- name: Extract
+  command: tar xzf ./actions-runner-linux-x64-2.316.0.tar.gz
+
+- name: configure runner
+  command: ./config.sh --url https://github.com/selmaboujenna/devoteam --token BHTMG3CA2ZCH7EQZH4GKPFDGGOOUW
+
+- name: run 
+  command: ./run.sh

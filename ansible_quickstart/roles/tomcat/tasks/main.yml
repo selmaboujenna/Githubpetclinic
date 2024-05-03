@@ -1,0 +1,5 @@
+- name: Install tomcat
+  community.general.zypper:
+    name: tomcat
+    state: latest
+    update_cache: true

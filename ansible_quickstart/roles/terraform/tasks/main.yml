@@ -1,0 +1,5 @@
+- name: Install terraform
+  community.general.zypper: 
+    name: terraform
+    state: latest
+    update_cache: true
