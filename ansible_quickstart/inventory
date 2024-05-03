@@ -1,13 +1,9 @@
-localhost
 
-#[prov]
-#20.67.26.43
+[testingVM]
+13.93.122.74 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
 
-# [testing]
-# 52.166.128.240
+[acceptanceVM]
+13.93.83.248 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
 
-# [acceptance]
-# 52.166.133.77
-
-# [prod]
-# 52.174.56.46
+[productionVM]
+13.95.149.53 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey

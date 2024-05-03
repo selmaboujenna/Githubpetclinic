@@ -11,6 +11,10 @@
   # - jmeter
   # - selenium
   # - terraform
+
+- hosts: testingVM
+  become: true
+  roles: 
     - github-runner
     
     
