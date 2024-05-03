@@ -1,0 +1,66 @@
+on:
+  push:
+    branches:
+      pets
+  schedule:
+    - cron: '0 0 * * *'  
+name: deploy to tomcat  
+    
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - run: echo $PATH
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: build package
+        run: mvn package
+      - name: upload war file
+        uses: actions//upload-artifact@v4
+        with:
+          name: my-artifact
+          path: target/*.war
+  move:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+         name: my-artifact
+      - name: move war file
+        run: cp target/petclinic.war /opt/tomcat/webapps
+
+  deploy:
+    name: deploy war file
+    needs: move
+    runs-on: self-hosted
+    steps:
+      - name: just deploy
+        working-directory: /opt/tomcat/bin
+        run: /opt/tomcat/bin/startup.sh run
+
+  test1:
+    name: JMETER
+    needs: deploy
+    runs-on: self-hosted
+    steps:
+      - name: JMeter test
+        working-directory: /opt/apache-jmeter-5.6.3/bin
+        run: ./jmeter.sh -n -t /opt/apache-jmeter-5.6.3/bin/Loadtesting-petclinic.jmx -l /home/selmaboujenna/repos/Githubpetclinic/test-result.jtl
+      - name: upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: /home/selmaboujenna/repos/Githubpetclinic/test-result.jtl
+
+  test2:
+      name: SELENIUM
+      needs: deploy
+      runs-on: self-hosted
+      steps:
+        - name: Checkout repo
+          uses: actions/checkout@v4
+        - name: execute selenium
+          run: pytest Selenium-pets.py
+         
