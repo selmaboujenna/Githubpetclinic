@@ -1,0 +1,6 @@
+
+- name: install zsh
+  community.general.zypper:
+    name: zsh
+    state: latest
+

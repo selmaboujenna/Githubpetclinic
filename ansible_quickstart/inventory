@@ -1,9 +1,3 @@
 
 [testingVM]
-13.93.122.74 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
-
-[acceptanceVM]
-13.93.83.248 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
-
-[productionVM]
-13.95.149.53 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
+13.93.24.162 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey

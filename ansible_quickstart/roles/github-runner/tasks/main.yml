@@ -1,11 +1,31 @@
+- name: Create runner workspace folder
+  file:
+    path: "/home/adminuser/actions-runner"
+    state: directory
+    owner: adminuser
+    mode: '0755'
+
 - name: download github runner
-  command: curl -o actions-runner-linux-x64-2.316.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
+  get_url:
+    url: https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
+    dest: /home/adminuser/actions-runner
+
+- name: change permissions
+  command: "chmod +x /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz"
+ 
 
 - name: Extract
-  command: tar xzf ./actions-runner-linux-x64-2.316.0.tar.gz
+  unarchive:
+    src: /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz
+    dest: /home/adminuser/actions-runner
+    remote_src: true
 
-- name: configure runner
-  command: ./config.sh --url https://github.com/selmaboujenna/devoteam --token BHTMG3CA2ZCH7EQZH4GKPFDGGOOUW
-
-- name: run 
-  command: ./run.sh
+- name: change permissions
+  command: "chmod -R 777 /home/adminuser/actions-runner/config.sh"
+    
+- name: config
+  shell:
+    chdir: /home/adminuser/actions-runner
+    cmd: ./config.sh --url https://github.com/selmaboujenna/Githubpetclinic --token BHTMG3DCX7H5BZ5XAWAN7BTGHHRJU
+    
+    

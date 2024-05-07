@@ -1,4 +1,3 @@
-
 - name: install runner
   community.general.zypper:
     name: gitlab-runner
