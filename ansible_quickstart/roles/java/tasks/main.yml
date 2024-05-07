@@ -1,0 +1,16 @@
+- name: install java
+  community.general.zypper:
+    name: java-11-openjdk-devel
+    state: present
+    update_cache: yes
+
+- name: set the JAVA_HOME
+  lineinfile:
+    path: /etc/profile
+    state: present
+    line: "{{item}}"
+  with_items:
+    - 'export JAVA_HOME="/usr/lib64/jvm/java-11-openjdk-11'
+    - 'export PATH=$PATH:$JAVA_home/bin'
+
+

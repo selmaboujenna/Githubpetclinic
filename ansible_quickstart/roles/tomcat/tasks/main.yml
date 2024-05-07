@@ -1,5 +1,69 @@
-- name: Install tomcat
-  community.general.zypper:
+- name: create group
+  group:
     name: tomcat
-    state: latest
-    update_cache: true
+    state: present
+
+- name: create user
+  user:
+    name: tomcat
+    groups: tomcat
+  become: true
+
+- name: download tomcat package
+  get_url:
+    url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.88/bin/apache-tomcat-9.0.88.tar.gz"
+    dest: /opt
+    owner: tomcat
+    group: tomcat
+
+- name: extract
+  unarchive:
+    src: /opt/apache-tomcat-9.0.88.tar.gz
+    dest: /opt
+    remote_src: true
+    owner: tomcat
+    group: tomcat
+
+- name: change permissions
+  shell:
+    cmd: chmod -R 777 /opt/apache-tomcat-9.0.88/bin/*.sh
+
+- name: create tomcat.service file
+  file:
+    path: /etc/systemd/system/tomcat.service
+    state: touch
+
+- name: contect tomcat.service file
+  copy:
+    dest: /etc/systemd/system/tomcat.service
+    content: |
+      [Service]
+      Type=forking
+
+      Environment="JAVA_HOME=/usr/lib64/jvm/java-11-openjdk-11"
+      Environment="CATALINA_PID=/opt/apache-tomcat-9.0.88/temp/tomcat.pid"
+      Environment="CATALINA_HOME=/opt/apache-tomcat-9.0.88"
+      Environment="CATALINA_BASE=/opt/apache-tomcat-9.0.88"
+      Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+      Environment="JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
+      ExecStart=/opt/apache-tomcat-9.0.88/bin/startup.sh
+      ExecStop=/opt/apache-tomcat-9.0.88/bin/shutdown.sh
+      User=tomcat
+      Group=tomcat
+      
+      [Install]
+      WantedBy=multi-user.target
+
+- name: change owner
+  file:
+    path: /etc/systemd/system/tomcat.service
+    owner: tomcat
+    group: tomcat
+
+- name: enable tomcat
+  systemd:
+    name: tomcat
+    state: started
+    enabled: yes
+    daemon_reload: true
+
