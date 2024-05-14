@@ -6,7 +6,7 @@ RUN tar xvf apache-tomcat-9.0.88.tar.gz
 
 RUN yum install -y java-11
 
-COPY /target/petclinic.war /apache-tomcat-9.0.87/webapps
+COPY /target/petclinic.war /apache-tomcat-9.0.88/webapps
 
 EXPOSE 8080
 
