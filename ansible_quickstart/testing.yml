@@ -37,7 +37,7 @@
 
  
 
-#   # - name: restart container
+#   # - name: restart container / login
 #   #   shell:
 #   #     cmd: systemctl restart docker
 
