@@ -19,9 +19,6 @@
       chdir: /opt/temp
       cmd: mvn package
 
-
-
-
   - name: build image
     shell:
       chdir: /opt/temp
