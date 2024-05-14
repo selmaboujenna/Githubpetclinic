@@ -14,6 +14,7 @@
       repo: https://github.com/selmaboujenna/Githubpetclinic.git
       dest: /opt/temp
       version: pets
+    ignore_errors: yes
       
   - name: maven build
     shell:
@@ -40,9 +41,9 @@
 #   #   shell:
 #   #     cmd: systemctl restart docker
 
-#   - name: draai container
-#     shell:
-#       cmd: docker run -d -p 8080:8080 selmaboujenna/mywebapp3
+  - name: draai container
+    shell:
+      cmd: docker run -d -p 8080:8080 provisioning1
 
 
 
