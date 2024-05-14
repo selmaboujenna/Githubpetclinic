@@ -13,6 +13,7 @@
     ansible.builtin.git:
       repo: https://github.com/selmaboujenna/Githubpetclinic.git
       dest: /opt/temp
+      version: pets
       
   - name: maven build
     shell:
