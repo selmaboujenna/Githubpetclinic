@@ -20,9 +20,9 @@
       cmd: mvn package
 
 
-  - name: docker login
-    shell:
-      cmd: docker login -u selmaboujenna -p dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM 
+  # - name: docker login
+  #   shell:
+  #     cmd: docker login -u selmaboujenna -p
 
   - name: build image
     shell:
