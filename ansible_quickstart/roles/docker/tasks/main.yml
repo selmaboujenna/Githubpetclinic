@@ -3,3 +3,23 @@
     name: docker
     state: latest
     update_cache: true
+
+- name: start docker
+  systemd:
+    name: docker
+    state: started 
+    enabled: yes
+    daemon_reload: yes
+    
+- name: docker user
+  shell:
+   cmd: usermod -aG docker adminuser
+
+- name: maak een groep
+  shell: 
+    cmd: newgrp docker
+  become: false
+
+- name: restart docker
+  shell:
+    cmd: systemctl restart docker
