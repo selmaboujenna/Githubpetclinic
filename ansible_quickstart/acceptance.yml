@@ -3,22 +3,6 @@
   become: true
   tasks:
 
-  - name: install git
-    community.general.zypper:
-      name: git
-      state: present
-
-  - name: Checkout repo
-    ansible.builtin.git:
-      repo: https://github.com/selmaboujenna/Githubpetclinic.git
-      dest: /opt/temp
-      version: pets
-    ignore_errors: yes
-
-  - name: refresh
-    shell:
-      cmd: id adminuser
-
   - name: docker login
     shell: 
       cmd: docker login -u selmaboujenna -p dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM

@@ -24,18 +24,11 @@
     name: adminuser
     group: docker 
     append: true 
- 
 
+- name: refresh
+  shell:
+    cmd: id adminuser
 
-# - name: docker user
-#   shell:
-#    cmd: usermod -aG docker adminuser
-
-# - name: add group
-#   shell: 
-#     cmd: newgrp docker
-#   become: false
- 
 - name: restart docker
   shell:
     cmd: systemctl restart docker
