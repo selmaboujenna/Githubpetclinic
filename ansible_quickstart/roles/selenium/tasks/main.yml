@@ -10,19 +10,20 @@
 
 - name: install chrome
   community.general.zypper:
-    name: google-chrome-stable
+    name: MozillaFirefox
     state: latest
     update_cache: true
 
-- name: download chromedriver
+- name: download driver
   get_url: 
-    url: https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.207/linux64/chromedriver-linux64.zip
+    url: https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
     dest: /opt
 
-- name: unarchive chromedriver
+- name: unarchive driver
   unarchive:
-    src: /opt/chromedriver-linux64.zip
+    src: /opt/geckodriver-v0.30.0-linux64.tar.gz
     dest: /opt
+    remote_src: yes
 
 - name: export path for chromedriver
   lineinfile:
@@ -30,7 +31,7 @@
     state: present
     line: "{{item}}"
   with_items:
-    - 'export PATH=${PATH}:/opt/chromedriver-linux64'
+    - 'export PATH=${PATH}:/opt/geckodriver-v0.30.0-linux64'
   
 - name: test
   shell:
