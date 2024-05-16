@@ -3,9 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def test_website():
-    options = webdriver.ChromeOptions()
+    options = webdriver.FirefoxOptions()
     options.add_argument('--headless')
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Firefox(options=options)
     driver.get("http://localhost:8080/petclinic/")
 
     CSS_selectors = ["#main-navbar > ul > li.active", "#main-navbar > ul > li:nth-child(2)", "#main-navbar > ul > li:nth-child(3)","#main-navbar > ul > li:nth-child(4)"]

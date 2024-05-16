@@ -31,7 +31,7 @@
     state: present
     line: "{{item}}"
   with_items:
-    - 'export PATH=${PATH}:/opt/geckodriver-v0.30.0-linux64'
+    - 'export PATH=${PATH}:/opt/geckodriver'
   
 - name: test
   shell:
