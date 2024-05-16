@@ -3,25 +3,24 @@
 - hosts: all
   become: true
   roles: 
-  #- docker 
+  - docker 
   # - ansible
   # - maven
   # - tomcat
   # - github-runner
-  #- java 
-  #- git 
+  - java 
+  - git 
 
 - hosts: testingVM
   become: true
   roles: 
-  #- maven
-  #- jmeter
+  - maven
+  - jmeter
 
 - hosts: acceptanceVM
   become: true
   roles:
   - selenium
-  - git
   
 
   

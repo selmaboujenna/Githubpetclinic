@@ -22,7 +22,7 @@
 - name: unarchive driver
   unarchive:
     src: /opt/geckodriver-v0.30.0-linux64.tar.gz
-    dest: /opt
+    dest: /usr/bin
     remote_src: yes
 
 - name: export path for chromedriver
@@ -31,7 +31,7 @@
     state: present
     line: "{{item}}"
   with_items:
-    - 'export PATH=${PATH}:/opt/geckodriver'
+    - 'export PATH=${PATH}:/usr/bin/geckodriver'
   
 - name: test
   shell:

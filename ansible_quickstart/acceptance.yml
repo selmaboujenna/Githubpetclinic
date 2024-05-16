@@ -20,19 +20,19 @@
       chdir: /opt/temp
       cmd: pytest Selenium-pets.py
 
-  - name: build image
-    shell:
-      chdir: /opt/temp
-      cmd: docker build -t prov_acc .
+  # - name: build image
+  #   shell:
+  #     chdir: /opt/temp
+  #     cmd: docker build -t prov_acc .
 
-  - name: adding tag
-    shell:
-      cmd: docker tag prov_acc selmaboujenna/prov_acc
+  # - name: adding tag
+  #   shell:
+  #     cmd: docker tag prov_acc selmaboujenna/prov_acc
 
-  - name: docker login
-    shell: 
-      cmd: docker login -u selmaboujenna -p dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM
+  # - name: docker login
+  #   shell: 
+  #     cmd: docker login -u selmaboujenna -p dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM
 
-  - name: push image
-    shell:
-      cmd: docker push selmaboujenna/prov_acc 
+  # - name: push image
+  #   shell:
+  #     cmd: docker push selmaboujenna/prov_acc 
