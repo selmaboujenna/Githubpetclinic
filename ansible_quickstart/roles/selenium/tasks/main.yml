@@ -2,3 +2,36 @@
   pip:
     name: selenium
     state: latest
+
+- name: install pytest
+  pip:
+    name: pytest
+    state: latest
+
+- name: install chrome
+  community.general.zypper:
+    name: google-chrome-stable
+    state: latest
+    update_cache: true
+
+- name: download chromedriver
+  get_url: 
+    url: https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.207/linux64/chromedriver-linux64.zip
+    dest: /opt
+
+- name: unarchive chromedriver
+  unarchive:
+    src: /opt/chromedriver-linux64.zip
+    dest: /opt
+
+- name: export path for chromedriver
+  lineinfile:
+    path: /home/adminuser/.bashrc
+    state: present
+    line: "{{item}}"
+  with_items:
+    - 'export PATH=${PATH}:/opt/chromedriver-linux64'
+  
+- name: test
+  shell:
+    cmd: source /home/adminuser/.bashrc

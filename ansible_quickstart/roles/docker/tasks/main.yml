@@ -10,18 +10,32 @@
     state: started 
     enabled: yes
     daemon_reload: yes
-    
-- name: docker user
-  shell:
-   cmd: usermod -aG docker adminuser
 
-- name: Add user to docker group
+- name: Ensure Docker group exists
+  become: yes
+  ansible.builtin.group:
+    name: docker
+    state: present
+  register: docker_group
+
+- name: Add User to docker group
+  become: yes
   ansible.builtin.user:
     name: adminuser
-    groups: docker
-    append: true
-  become: false
+    group: docker 
+    append: true 
+ 
 
+
+# - name: docker user
+#   shell:
+#    cmd: usermod -aG docker adminuser
+
+# - name: add group
+#   shell: 
+#     cmd: newgrp docker
+#   become: false
+ 
 - name: restart docker
   shell:
     cmd: systemctl restart docker

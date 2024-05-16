@@ -26,15 +26,6 @@
       chdir: /opt/temp
       cmd: docker build -t provisioning1 .
 
-
-     
-
-
-
-#   - name: pull image
-#     shell:
-#       cmd: docker pull selmaboujenna/mywebapp3
-
   - name: draai container
     shell:
       cmd: docker run -d -p 8080:8080 provisioning1
