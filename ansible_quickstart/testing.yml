@@ -9,6 +9,11 @@
       chdir: /opt/temp
       cmd: mvn package
 
+  - name: stop docker
+    shell:
+      cmd: docker stop $(docker ps -q)
+    ignore_errors: yes
+
   - name: build image
     shell:
       chdir: /opt/temp
@@ -25,10 +30,6 @@
   - name: adding tag
     shell:
       cmd: docker tag provisioning1 selmaboujenna/provisioning1
-
-  - name: docker login
-    shell: 
-      cmd: docker login -u selmaboujenna -p dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM
 
   - name: push image
     shell:

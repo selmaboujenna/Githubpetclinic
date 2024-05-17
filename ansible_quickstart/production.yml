@@ -1,5 +1,4 @@
----
-- hosts: acceptanceVM
+- hosts: productionVM
   become: true
   tasks:
 
@@ -15,8 +14,3 @@
   - name: draai container
     shell:
       cmd: docker run -d -p 8080:8080 selmaboujenna/provisioning1:latest
-
-  - name: run selenium
-    shell:
-      chdir: /opt/temp
-      cmd: pytest Selenium-pets.py
