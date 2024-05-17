@@ -3,7 +3,7 @@
 - hosts: all
   become: true
   roles: 
-  - docker 
+  # - docker 
   # - ansible
   # - tomcat
   # - github-runner
@@ -20,6 +20,14 @@
   become: true
   roles:
   #- selenium
+
+- hosts: provisioningVM
+  become: true
+  roles:
+  - ansible
+  - terraform
+  - git
+  - github-runner
 
   
 

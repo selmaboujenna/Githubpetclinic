@@ -1,49 +1,49 @@
-# - name: Create runner workspace folder
-#   file:
-#     path: "/home/adminuser/actions-runner"
-#     owner: adminuser
-#     group: users
-#     mode: '0755'
-#     recurse: yes
+- name: Create runner workspace folder
+  file:
+    path: "/home/adminuser/actions-runner"
+    owner: adminuser
+    group: users
+    mode: '0755'
+    recurse: yes
 
-# - name: download github runner
-#   get_url:
-#     url: https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
-#     dest: /home/adminuser/actions-runner
-#     owner: adminuser
+- name: download github runner
+  get_url:
+    url: https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
+    dest: /home/adminuser/actions-runner
+    owner: adminuser
 
-# - name: change permissions
-#   command: "chmod +x /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz"
+- name: change permissions
+  command: "chmod +x /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz"
  
 
-# - name: Extract
-#   unarchive:
-#     src: /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz
-#     dest: /home/adminuser/actions-runner
-#     remote_src: true
-#     owner: adminuser
+- name: Extract
+  unarchive:
+    src: /home/adminuser/actions-runner/actions-runner-linux-x64-2.316.0.tar.gz
+    dest: /home/adminuser/actions-runner
+    remote_src: true
+    owner: adminuser
 
-# - name: change permissions
-#   command: "chmod -R 777 /home/adminuser/actions-runner/config.sh"   
+- name: change permissions
+  command: "chmod -R 777 /home/adminuser/actions-runner/config.sh"   
 
-# - name: whoami
-#   command: whoami
+- name: whoami
+  command: whoami
     
-# - name: config
-#   become: false
-#   become_user: selmaboujenna
-#   shell:
-#    chdir: /home/adminuser/actions-runner
-#    cmd: "./config.sh --url https://github.com/selmaboujenna/Githubpetclinic --token BHTMG3HCSPH5VIUUIUUQMHTGHH3TG --unattended" 
+- name: config
+  become: false
+  become_user: selmaboujenna
+  shell:
+   chdir: /home/adminuser/actions-runner
+   cmd: "./config.sh --url https://github.com/selmaboujenna/Githubpetclinic --token BHTMG3BEZNZXFPSRMYRI6ZLGI4UNK --unattended" 
 
-# - name: change permissions
-#   command: "chmod -R 777 /home/adminuser/actions-runner/svc.sh"
+- name: change permissions
+  command: "chmod -R 777 /home/adminuser/actions-runner/svc.sh"
 
-# - name: run runner as service
-#   shell: 
-#     cmd: /home/adminuser/actions-runner/svc.sh install
-#     chdir: /home/adminuser/actions-runner
-#   become: true
+- name: run runner as service
+  shell: 
+    cmd: /home/adminuser/actions-runner/svc.sh install
+    chdir: /home/adminuser/actions-runner
+  become: true
   
 - name: start runner as service
   shell: 

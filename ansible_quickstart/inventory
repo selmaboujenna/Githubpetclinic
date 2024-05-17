@@ -1,12 +1,16 @@
 
 [testingVM]
-20.224.237.51 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
+20.224.237.51 ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
 
 [acceptanceVM]
-20.224.237.71 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
+20.224.237.71 ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
 
 [productionVM]
-20.224.237.20 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/.ssh/azurekey
+20.224.237.20 ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+
+[provisioningVM]
+20.56.99.162 ansible_user=adminuser ansible_ssh_private_key_file=/home/selmaboujenna/Downloads/provisioningVM_key.pem
+
 
 [all:vars]
 passw = dckr_pat_P9Uz9meMEr9x4DN95vcupaoRQbM
