@@ -1,0 +1,46 @@
+on:
+  push:
+    branches:
+      pets  
+name: automate provisioning
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - name: initialize terraform
+      run: terraform init
+    - name: create VMs
+      run: terraform apply
+  
+  configure:
+  needs: build
+  runs-on: self-hosted
+  steps:
+  - name: run playbook
+    run: ansible-playbook playbook.yml
+  - name: assign IP's correctly
+    run:
+
+  testing:
+  needs: configure
+  runs-on: self-hosted
+  steps:
+  - name: run playbook for testingVM
+    run: ansible-playbook testingVM.yml
+
+  acceptance:
+  needs: testing
+  runs-on: self-hosted
+  steps:
+  - name: run playbook for acceptanceVM
+    run: ansible-playbook acceptance.yml
+
+  production:
+  needs: acceptance
+  runs-on: self-hosted
+  steps:
+    - name: run playbook for productionVM
+      run: ansible-playbook productionVM
+
+& nog destroy options

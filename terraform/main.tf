@@ -4,6 +4,9 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 3.0.2"
     }
+    local ={
+      source = "hashicorp/local"
+    }
   }
 
   required_version = ">= 0.13.4"
@@ -105,3 +108,40 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     version   = "latest"
   }
 }
+
+data "azurerm_public_ip" "provisioning_public_ip"{
+  name = azurerm_public_ip.provisioning_public_ip[0].name
+  resource_group_name = azurerm_linux_virtual_machine.linux_vm[0].resource_group_name
+}
+
+data "azurerm_public_ip" "provisioning_public_ip1"{
+  name = azurerm_public_ip.provisioning_public_ip[1].name
+  resource_group_name = azurerm_linux_virtual_machine.linux_vm[1].resource_group_name
+}
+
+data "azurerm_public_ip" "provisioning_public_ip2"{
+  name = azurerm_public_ip.provisioning_public_ip[2].name
+  resource_group_name = azurerm_linux_virtual_machine.linux_vm[2].resource_group_name
+}
+
+locals {
+  my_first_ip = data.azurerm_public_ip.provisioning_public_ip.ip_address
+  my_second_ip =data.azurerm_public_ip.provisioning_public_ip1.ip_address
+  my_third_ip = data.azurerm_public_ip.provisioning_public_ip2.ip_address
+  testingVM = "[testingVM]"
+  acceptanceVM = "[acceptanceVM]"
+  productionVM = "[productionVM]"  
+}
+
+resource "local_file" "ansible" {
+  filename = "/home/selmaboujenna/repos/Githubpetclinic/ansible_quickstart/inventory"
+  content = <<-EOT
+  ${local.testingVM}
+  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  ${local.acceptanceVM}
+  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  ${local.productionVM}
+  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  EOT
+}
+

@@ -8,7 +8,7 @@
   # - tomcat
   # - github-runner
   # - java 
-  #- git 
+  - git 
 
 - hosts: testingVM
   become: true
@@ -21,13 +21,8 @@
   roles:
   #- selenium
 
-- hosts: provisioningVM
-  become: true
-  roles:
-  - ansible
-  - terraform
-  - git
-  - github-runner
+
+
 
   
 
