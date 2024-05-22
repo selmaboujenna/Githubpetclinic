@@ -134,14 +134,14 @@ locals {
 }
 
 resource "local_file" "ansible" {
-  filename = "/home/selmaboujenna/repos/Githubpetclinic/ansible_quickstart/inventory"
+  filename = "/home/adminuser/temp/ansible_quickstart/inventory"
   content = <<-EOT
   ${local.testingVM}
-  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} 
   ${local.acceptanceVM}
-  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} 
   ${local.productionVM}
-  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser ansible_ssh_private_key_file=/home/adminuser/.ssh/azurekey
+  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} 
   EOT
 }
 

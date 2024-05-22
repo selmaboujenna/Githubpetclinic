@@ -33,12 +33,22 @@
   shell:
     cmd: systemctl restart docker
 
+- name: Install websocket-client compatible with Python 3.6
+  pip:
+    name: websocket-client==0.57.0
+    state: present
+
 - name: install docker-py
   pip:
-    name: docker
-    state: latest
+    name: docker-py
+    state: present
+
+- name: Include vault variables
+  include_vars:
+    file: vault.yml
 
 - name: docker login
-  docker_login: 
-    username: selmaboujenna
-    password: "{{passw}}"
+  docker_login:
+    username: "{{docker_username}}"
+    password: "{{docker_password}}"
+                                        
