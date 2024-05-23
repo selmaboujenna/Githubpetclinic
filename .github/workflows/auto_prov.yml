@@ -12,10 +12,9 @@ jobs:
       uses: actions/checkout@v4
     - name: initialize terraform
       run: terraform init
-    - name: change path
-      run: cd terraform
     - name: create VMs
       run: terraform apply --auto-approve
+      working-directory: terraform
   
   configure:
     needs: build
