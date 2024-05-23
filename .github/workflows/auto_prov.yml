@@ -13,7 +13,7 @@ jobs:
     - name: initialize terraform
       run: terraform init
     - name: change path
-      run: pwd
+      run: cd terraform
     - name: create VMs
       run: terraform apply --auto-approve
   
