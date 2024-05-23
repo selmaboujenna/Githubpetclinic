@@ -8,8 +8,11 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - name: hostname
-      run: hostname -I
+    - name: az login
+      run: az login
+      env: 
+        AZURE_SERVICE_PRINCIPAL_USER: ${{secrets.AZURE_SERVICE_PRINCIPAL_USER}}
+        AZURE_SERVICE_PRINCIPAL_USER: ${{secrets.AZURE_SERVICE_PRINCIPAL_PASSWORD}}
     - name: initialize terraform
       run: terraform init
       working-directory: terraform
