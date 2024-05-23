@@ -8,6 +8,8 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
+    - name: hostname
+      run: hostname -I
     - name: initialize terraform
       run: terraform init
       working-directory: terraform
