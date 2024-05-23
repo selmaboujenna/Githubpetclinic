@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: initialize terraform
       run: terraform init
     - name: create VMs
@@ -20,7 +20,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: maak een vault password file
       run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
     - name: run playbook
@@ -33,7 +33,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: checkout repo 
-      run: actions/checkout@v2
+      run: actions/checkout@v4
     - name: run playbook for testingVM
       run: ansible-playbook testingVM.yml
 
