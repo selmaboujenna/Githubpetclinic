@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: az login
-      run: az login --accesstoken "${{AZURE_CLI_TOKEN}}"
+      run: az login --accesstoken "${{secrets.AZURE_CLI_TOKEN}}"
     - name: initialize terraform
       run: terraform init
       working-directory: terraform
