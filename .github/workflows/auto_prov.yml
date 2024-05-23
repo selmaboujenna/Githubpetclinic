@@ -43,4 +43,3 @@ jobs:
     - name: run playbook for productionVM
       run: ansible-playbook productionVM
 
-& nog destroy options
