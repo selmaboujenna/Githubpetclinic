@@ -14,38 +14,38 @@ jobs:
       run: terraform apply --auto-approve
   
   configure:
-  needs: build
-  runs-on: self-hosted
-  steps:
-  - name: checkout repo
-    uses: actions/checkout@v2
-  - name: maak een vault password file
-    run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
-  - name: run playbook
-    run: ansible-playbook playbook.yml --vault-password-file /tmp/vault_pass.txt
-  - name: verwijder vault pass
-    run: rm /tmp/vault_pass.txt
+    needs: build
+    runs-on: self-hosted
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+    - name: maak een vault password file
+      run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
+    - name: run playbook
+      run: ansible-playbook playbook.yml --vault-password-file /tmp/vault_pass.txt
+    - name: verwijder vault pass
+      run: rm /tmp/vault_pass.txt
 
   testing:
-  needs: configure
-  runs-on: self-hosted
-  steps:
-  - name: checkout repo 
-    run: actions/checkout@v2
-  - name: run playbook for testingVM
-    run: ansible-playbook testingVM.yml
+    needs: configure
+    runs-on: self-hosted
+    steps:
+    - name: checkout repo 
+      run: actions/checkout@v2
+    - name: run playbook for testingVM
+      run: ansible-playbook testingVM.yml
 
   acceptance:
-  needs: testing
-  runs-on: self-hosted
-  steps:
-  - name: run playbook for acceptanceVM
-    run: ansible-playbook acceptance.yml
+    needs: testing
+    runs-on: self-hosted
+    steps:
+    - name: run playbook for acceptanceVM
+      run: ansible-playbook acceptance.yml
 
   production:
-  needs: acceptance
-  runs-on: self-hosted
-  steps:
-    - name: run playbook for productionVM
-      run: ansible-playbook productionVM
+    needs: acceptance
+    runs-on: self-hosted
+    steps:
+      - name: run playbook for productionVM
+        run: ansible-playbook productionVM
 
