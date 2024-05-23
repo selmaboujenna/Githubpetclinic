@@ -9,7 +9,12 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: az login
-      run: az login --accesstoken "${{secrets.AZURE_CLI_TOKEN}}"
+      uses: azure/login@v1
+      with:
+        client-id: ${{secrets.CLIENT_ID}}
+        tenant-id: ${{secrets.TENANT_ID}}
+        subscription-id: ${{secrets.SUBSCRIPTION_ID}}
+
     - name: initialize terraform
       run: terraform init
       working-directory: terraform
