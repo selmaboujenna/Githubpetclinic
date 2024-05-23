@@ -12,6 +12,8 @@ jobs:
       uses: actions/checkout@v4
     - name: initialize terraform
       run: terraform init
+    - name: change path
+      run: pwd
     - name: create VMs
       run: terraform apply --auto-approve
   
