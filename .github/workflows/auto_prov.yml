@@ -11,14 +11,16 @@ jobs:
     - name: initialize terraform
       run: terraform init
     - name: create VMs
-      run: terraform apply
+      run: terraform apply --auto-approve
   
   configure:
   needs: build
   runs-on: self-hosted
   steps:
   - name: run playbook
-    run: ansible-playbook playbook.yml
+    run: ansible-playbook playbook.yml --ask-vault-pass
+    with: 
+      password: ${{secrets.VAULT_PASS}}
 
   testing:
   needs: configure
