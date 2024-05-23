@@ -8,6 +8,8 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
     - name: initialize terraform
       run: terraform init
     - name: create VMs
