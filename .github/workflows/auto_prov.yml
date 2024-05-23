@@ -17,10 +17,12 @@ jobs:
   needs: build
   runs-on: self-hosted
   steps:
+  - name: maak een vault password file
+    run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
   - name: run playbook
-    run: ansible-playbook playbook.yml --ask-vault-pass
-    with: 
-      password: ${{secrets.VAULT_PASS}}
+    run: ansible-playbook playbook.yml --vault-password-file /tmp/vault_pass.txt
+  - name: verwijder vault pass
+    run: rm /temp/vault_pass.txt
 
   testing:
   needs: configure
