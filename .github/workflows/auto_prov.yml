@@ -19,8 +19,6 @@ jobs:
   steps:
   - name: run playbook
     run: ansible-playbook playbook.yml
-  - name: assign IP's correctly
-    run:
 
   testing:
   needs: configure

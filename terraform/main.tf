@@ -137,11 +137,11 @@ resource "local_file" "ansible" {
   filename = "/home/adminuser/temp/ansible_quickstart/inventory"
   content = <<-EOT
   ${local.testingVM}
-  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} 
+  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser
   ${local.acceptanceVM}
-  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} 
+  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser
   ${local.productionVM}
-  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} 
+  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser
   EOT
 }
 
