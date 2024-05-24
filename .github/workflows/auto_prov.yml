@@ -11,6 +11,7 @@ jobs:
     - name: az login
       uses: azure/login@v1
       with:
+        auth-type: IDENTITY
         client-id: ${{secrets.CLIENT_ID}}
         tenant-id: ${{secrets.TENANT_ID}}
         subscription-id: ${{secrets.SUBSCRIPTION_ID}}
