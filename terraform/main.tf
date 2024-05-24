@@ -110,6 +110,9 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     sku       = "gen2"
     version   = "latest"
   }
+  identity {
+    type = "UserAssigned"
+  }
 }
 
 data "azurerm_public_ip" "provisioning_public_ip"{
