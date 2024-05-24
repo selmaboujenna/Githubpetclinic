@@ -13,7 +13,11 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    managed_identity {
+        enabled = true
+    }
+  }
 }
 
 data "azurerm_resource_group" "boujenna_selma-rg" {
