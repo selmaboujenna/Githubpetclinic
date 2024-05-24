@@ -13,10 +13,10 @@ terraform {
     
 }
 
-provider "azurerm" {
+provider "registry.terraform.io/hashicorp/azurerm" {
   features {
     }
-    use_msi = true
+    use_msi= true
 }
 
 data "azurerm_resource_group" "boujenna_selma-rg" {
@@ -109,9 +109,6 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     offer     = "openSUSE-leap-15-4"
     sku       = "gen2"
     version   = "latest"
-  }
-  identity {
-    type = "UserAssigned"
   }
 }
 
