@@ -10,10 +10,18 @@ terraform {
   }
 
   required_version = ">= 0.13.4"
-    
+  
+  backend "azurerm" {
+    resource_group_name  = "boujenna_selma-rg"                                        
+    key                  = "prod.terraform.tfstate"                
+    use_msi              = true                                    
+    client_id            = var.client_id  
+    subscription_id      = var.subscription_id 
+    tenant_id            = var.tenant_id 
+  }
 }
 
-provider "registry.terraform.io/hashicorp/azurerm" {
+provider "azurerm" {
   features {
     }
     use_msi= true
