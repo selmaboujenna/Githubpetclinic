@@ -10,15 +10,24 @@ terraform {
   }
 
   required_version = ">= 0.13.4"
+
+  backend "azurerm"{
+    resource_group_name   = "boujenna_selma-rg"
+    storage_account_name  = "prov123"
+    container_name        = "tfstate"
+    key                   = "<terraform.tfstate"
+    use_msi               = true
+    client_id             = var.client_id
+    tenant_id             = var.tenant_id
+    subscription_id       = var.subscription_id
+    
+  }
 }
 
 provider "azurerm" {
   features {
-    use_msi = true
     managed_identity {
         enabled = true
-    subscription_id = var.subscription_id
-    tenant_id = var.tenant_id
     }
   }
 }
