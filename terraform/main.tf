@@ -14,8 +14,11 @@ terraform {
 
 provider "azurerm" {
   features {
+    use_msi = true
     managed_identity {
         enabled = true
+    subscription_id = var.subscription_id
+    tenant_id = var.tenant_id
     }
   }
 }

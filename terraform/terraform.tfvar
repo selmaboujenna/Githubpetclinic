@@ -3,3 +3,6 @@ node_rgname = "boujenna_selma-rg"
 resource_prefix = "linuxnode"
 Environment = "provisioning"
 node_count = 3
+
+subscription_id = "41e50375-b926-4bc4-9045-348f359cf721"
+tenant_id = "f82b3c62-b635-402b-afa2-a1a807bbfd42"
