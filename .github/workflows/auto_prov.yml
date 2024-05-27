@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: where am i
-      run: pwd
+      run: terraform state rm "ansible"
  
     # - name: az login
     #   uses: azure/login@v1
