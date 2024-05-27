@@ -19,9 +19,7 @@ terraform {
 }
 
 provider "azurerm" {
-  features {
-    }
-    use_msi= true
+  features {}
 }
 
 data "azurerm_resource_group" "boujenna_selma-rg" {
