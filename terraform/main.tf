@@ -141,6 +141,12 @@ locals {
   productionVM = "[productionVM]"  
 }
 
+resource "execute" "prepare_directory" {
+  provisioner "local-exec" {
+    command = "chmod 755 /home/adminuser/temp/ansible_quickstart"
+  }
+}
+
 resource "local_file" "ansible" {
   filename = "/home/adminuser/temp/ansible_quickstart/inventory"
   content = <<-EOT
