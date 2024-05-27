@@ -8,6 +8,8 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
+    - name: wherami
+      run: pwd
     
  
     # - name: az login
