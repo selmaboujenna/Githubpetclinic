@@ -12,8 +12,8 @@ terraform {
   required_version = ">= 0.13.4"
   
   backend "azurerm" {
-    resource_group_name  = "boujenna_selma-rg"                                        
-    key                  = "prod.terraform.tfstate"                
+    resource_group_name  = "tfstate"                                        
+    key                  = "terraform.tfstate"                
     use_oidc              = true                                    
   }
 }
