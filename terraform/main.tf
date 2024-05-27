@@ -132,16 +132,6 @@ data "azurerm_public_ip" "provisioning_public_ip2"{
   resource_group_name = azurerm_linux_virtual_machine.linux_vm[2].resource_group_name
 }
 
-locals {
-  my_first_ip = data.azurerm_public_ip.provisioning_public_ip.ip_address
-  my_second_ip =data.azurerm_public_ip.provisioning_public_ip1.ip_address
-  my_third_ip = data.azurerm_public_ip.provisioning_public_ip2.ip_address
-  testingVM = "[testingVM]"
-  acceptanceVM = "[acceptanceVM]"
-  productionVM = "[productionVM]"  
-}
-
-
 resource "dynamic_inventory" "generate_inventory" {
   provisioner = "local-exec" {
     command = <<- EOF
