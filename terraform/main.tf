@@ -10,6 +10,7 @@ terraform {
   }
 
   required_version = ">= 0.13.4"
+
 }
 
 provider "azurerm" {
@@ -133,17 +134,15 @@ locals {
   productionVM = "[productionVM]"  
 }
 
-
-resource "null_resource" "generate_inventory_file" {
-  provisioner "remote-exec" {
-    inline = [
-      "echo '${local.testingVM}' >> /home/adminuser/temp/ansible_quickstart/inventory",
-      "echo '${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser' >> /home/adminuser/temp/ansible_quickstart/inventory",
-      "echo '${local.acceptanceVM}' >> /home/adminuser/temp/ansible_quickstart/inventory",
-      "echo '${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser' >> /home/adminuser/temp/ansible_quickstart/inventory",
-      "echo '${local.productionVM}' >> /home/adminuser/temp/ansible_quickstart/inventory",
-      "echo '${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser' >> /home/adminuser/temp/ansible_quickstart/inventory"
-    ]
-  }
+resource "local_file" "ansible" {
+  filename = "/home/adminuser/temp/ansible_quickstart/inventory"
+  content = <<-EOT
+  ${local.testingVM}
+  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser
+  ${local.acceptanceVM}
+  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser
+  ${local.productionVM}
+  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser
+  EOT
 }
 
