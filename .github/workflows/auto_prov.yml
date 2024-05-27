@@ -8,10 +8,6 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - name: wherami
-      run: pwd
-    
- 
     # - name: az login
     #   uses: azure/login@v1
     #   with:
@@ -22,13 +18,13 @@ jobs:
 
     - name: initialize terraform
       run: terraform init
-      working-directory: terraform
-    - name: where am i
-      run: terraform destroy --auto-approve
-      working-directory: terraform
+      working-directory: /home/adminuser/temp/terraform
+    # - name: where am i
+    #   run: terraform destroy --auto-approve
+    #   working-directory: /home/adminuser/temp/terraform
     - name: create VMs
       run: terraform apply --auto-approve
-      working-directory: terraform
+      working-directory: /home/adminuser/temp/terraform
   
   configure:
     needs: build
