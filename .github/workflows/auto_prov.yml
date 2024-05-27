@@ -6,16 +6,10 @@ name: automate provisioning
 
 jobs:
   build:
-    env:
-      ARM_CLIENT_ID: ${{secrets.CLIENT_ID}}
-      ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
-      ARM_TENANT_ID: ${{secrets.TENANT_ID}}
-      ARM_USE_OIDC: "true"
-      ARM_ACCES_KEY: $ACCOUNT_KEY
     runs-on: self-hosted
     steps:
     - name: where am i
-      run: whoami
+      run: pwd
  
     # - name: az login
     #   uses: azure/login@v1
