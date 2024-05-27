@@ -143,7 +143,7 @@ locals {
 
 resource "execute" "prepare_directory" {
   provisioner "local-exec" {
-    command = "chmod 755 /home/adminuser/temp/ansible_quickstart"
+    command = "chmod 755 /home/adminuser/temp/ansible_quickstart && ls -l /home/adminuser/temp/ansible_quickstart"
   }
 }
 
