@@ -8,9 +8,7 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - name: where am i
-      run: terraform state rm "ansible"
-      working-directory: terraform
+    
  
     # - name: az login
     #   uses: azure/login@v1
@@ -22,6 +20,9 @@ jobs:
 
     - name: initialize terraform
       run: terraform init
+      working-directory: terraform
+    - name: where am i
+      run: terraform state rm "ansible"
       working-directory: terraform
     - name: create VMs
       run: terraform apply --auto-approve
