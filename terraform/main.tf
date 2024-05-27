@@ -14,7 +14,7 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "boujenna_selma-rg"                                        
     key                  = "prod.terraform.tfstate"                
-    use_msi              = true                                    
+    use_oidc              = true                                    
   }
 }
 
