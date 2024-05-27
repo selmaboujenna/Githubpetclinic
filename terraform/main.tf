@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      version = "~> 3.7.0"
     }
     local ={
       source = "hashicorp/local"
@@ -15,7 +15,7 @@ terraform {
     resource_group_name  = "boujenna_selma-rg"  
     storage_account_name = "prov123"
     container_name =     = "storagecontainer"                                
-    key                  = "terraform.tfstate"                
+    key                  = "prod.terraform.tfstate"                
     use_oidc             = true                                    
   }
 }
