@@ -141,21 +141,16 @@ locals {
   productionVM = "[productionVM]"  
 }
 
-resource "execute" "prepare_directory" {
-  provisioner "local-exec" {
-    command = "chmod 755 /home/adminuser/temp/ansible_quickstart && ls -l /home/adminuser/temp/ansible_quickstart"
-  }
-}
 
-resource "local_file" "ansible" {
-  filename = "/home/adminuser/temp/ansible_quickstart/inventory"
-  content = <<-EOT
-  ${local.testingVM}
-  ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser
-  ${local.acceptanceVM}
-  ${data.azurerm_public_ip.provisioning_public_ip1.ip_address} ansible_user=adminuser
-  ${local.productionVM}
-  ${data.azurerm_public_ip.provisioning_public_ip2.ip_address} ansible_user=adminuser
-  EOT
+resource "dynamic_inventory" "generate_inventory" {
+  provisioner = "local-exec" {
+    command = <<- EOF
+      echo "{"
+      echo "\"testingVM\": {\"ip_address\": \"${data.azurerm_public_ip.provisioning_public_ips[0].ip_address}\", \"ansible_user\": \"adminuser\"},"
+      echo "\"acceptanceVM\": {\"ip_address\": \"${data.azurerm_public_ip.provisioning_public_ips[1].ip_address}\", \"ansible_user\": \"adminuser\"},"
+      echo "\"productionVM\": {\"ip_address\": \"${data.azurerm_public_ip.provisioning_public_ips[2].ip_address}\", \"ansible_user\": \"adminuser\"}"
+      echo "}" > /home/adminuser/temp/ansible_quickstart/inventory
+      EOF
+  }
 }
 
