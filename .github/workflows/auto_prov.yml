@@ -22,7 +22,7 @@ jobs:
       run: terraform init
       working-directory: terraform
     - name: where am i
-      run: terraform state rm "ansible"
+      run: terraform destroy -- auto-approve
       working-directory: terraform
     - name: create VMs
       run: terraform apply --auto-approve
