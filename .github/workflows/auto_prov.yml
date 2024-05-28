@@ -36,7 +36,7 @@ jobs:
       run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
     - name: run playbook
       run: ansible-playbook playbook.yml --vault-password-file /tmp/vault_pass.txt
-      working-directory: /home/adminuser/temp/ansible-quickstart
+      working-directory: /home/adminuser/temp/ansible_quickstart
     - name: verwijder vault pass
       run: rm /tmp/vault_pass.txt
 
@@ -44,9 +44,11 @@ jobs:
     needs: configure
     runs-on: self-hosted
     steps:
+    - name: checkout repo 
+      uses: actions/checkout@v4
     - name: run playbook for testingVM
       run: ansible-playbook testingVM.yml
-      working-directory: /home/adminuser/temp/ansible-quickstart
+      working-directory: /home/adminuser/temp/ansible_quickstart
 
   acceptance:
     needs: testing
@@ -54,7 +56,7 @@ jobs:
     steps:
     - name: run playbook for acceptanceVM
       run: ansible-playbook acceptance.yml
-      working-directory: /home/adminuser/temp/ansible-quickstart
+      working-directory: /home/adminuser/temp/ansible_quickstart
 
   production:
     needs: acceptance
@@ -62,5 +64,5 @@ jobs:
     steps:
       - name: run playbook for productionVM
         run: ansible-playbook productionVM
-        working-directory: /home/adminuser/temp/ansible-quickstart
+        working-directory: /home/adminuser/temp/ansible_quickstart
 
