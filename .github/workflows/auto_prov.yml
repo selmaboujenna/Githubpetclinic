@@ -47,6 +47,7 @@ jobs:
       run: actions/checkout@v4
     - name: run playbook for testingVM
       run: ansible-playbook testingVM.yml
+      working-directory: /home/adminuser/temp/ansible-quickstart
 
   acceptance:
     needs: testing
@@ -54,6 +55,7 @@ jobs:
     steps:
     - name: run playbook for acceptanceVM
       run: ansible-playbook acceptance.yml
+      working-directory: /home/adminuser/temp/ansible-quickstart
 
   production:
     needs: acceptance
@@ -61,4 +63,5 @@ jobs:
     steps:
       - name: run playbook for productionVM
         run: ansible-playbook productionVM
+        working-directory: /home/adminuser/temp/ansible-quickstart
 
