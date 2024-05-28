@@ -17,7 +17,7 @@ jobs:
     #     subscription-id: ${{secrets.SUBSCRIPTION_ID}}
     - name: insert repo on prov vm
       run: git clone https://github.com/selmaboujenna/Githubpetclinic.git
-      working-directory: /home/adminuser/lab
+      working-directory: /home/adminuser
     - name: initialize terraform
       run: terraform init
       working-directory: /home/adminuser/temp/terraform
