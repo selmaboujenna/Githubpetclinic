@@ -15,13 +15,12 @@ jobs:
     #     client-id: ${{secrets.CLIENT_ID}}
     #     tenant-id: ${{secrets.TENANT_ID}}
     #     subscription-id: ${{secrets.SUBSCRIPTION_ID}}
-
+    - name: insert repo on prov vm
+      run: git clone https://github.com/selmaboujenna/Githubpetclinic.git
+      working-directory: /home/adminuser/lab
     - name: initialize terraform
       run: terraform init
       working-directory: /home/adminuser/temp/terraform
-    # - name: where am i
-    #   run: terraform destroy --auto-approve
-    #   working-directory: /home/adminuser/temp/terraform
     - name: create VMs
       run: terraform apply --auto-approve
       working-directory: /home/adminuser/temp/terraform
