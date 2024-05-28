@@ -78,6 +78,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: delete testingVM
-        run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[0] && azurerm_linux_virtual_machine.linux_vm[1] --auto-approve
+        run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[0] --auto-approve
+        working-directory: /home/adminuser/temp/terraform
+      - name: delete acceptanceVM
+        run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[1] --auto-approve
         working-directory: /home/adminuser/temp/terraform
 
