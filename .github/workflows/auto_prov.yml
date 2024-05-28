@@ -44,8 +44,6 @@ jobs:
     needs: configure
     runs-on: self-hosted
     steps:
-    - name: checkout repo 
-      uses: actions/checkout@v4
     - name: run playbook for testingVM
       run: ansible-playbook testingVM.yml
       working-directory: /home/adminuser/temp/ansible-quickstart
