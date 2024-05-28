@@ -47,7 +47,7 @@ jobs:
     - name: checkout repo 
       uses: actions/checkout@v4
     - name: run playbook for testingVM
-      run: ansible-playbook testingVM.yml
+      run: ansible-playbook -i inventory testing.yml
       working-directory: /home/adminuser/temp/ansible_quickstart
 
   acceptance:
@@ -55,7 +55,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: run playbook for acceptanceVM
-      run: ansible-playbook acceptance.yml
+      run: ansible-playbook -i inventory acceptance.yml
       working-directory: /home/adminuser/temp/ansible_quickstart
 
   production:
@@ -63,6 +63,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: run playbook for productionVM
-        run: ansible-playbook productionVM
+        run: ansible-playbook -i inventory production.yml
         working-directory: /home/adminuser/temp/ansible_quickstart
 
