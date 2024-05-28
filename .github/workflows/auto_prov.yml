@@ -36,6 +36,7 @@ jobs:
       run: echo "${{secrets.VAULT_PASS}}" > /tmp/vault_pass.txt
     - name: run playbook
       run: ansible-playbook playbook.yml --vault-password-file /tmp/vault_pass.txt
+      working-directory: /home/adminuser/temp/ansible-quickstart
     - name: verwijder vault pass
       run: rm /tmp/vault_pass.txt
 
