@@ -3,14 +3,11 @@
     url: https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
     dest: /opt
 
-- name: give permissions
-  run: chmod +x /opt/apache-jmeter-5.6.3.tgz
-  become: true
-
 - name: extract package
   unarchive: 
     src: /opt/apache-jmeter-5.6.3.tgz
     dest: /opt
+    remote_src: yes
  
 
 
