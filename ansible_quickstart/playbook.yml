@@ -7,23 +7,23 @@
   vars:
     ansible_ssh_private_key_file: "{{ key1 }}"
   roles: 
-  # - docker 
+  - docker 
   # - ansible
   # - tomcat
   # - github-runner
-  # - java 
-  # - git 
+  - java 
+  - git 
 
 - hosts: testingVM
   become: true
   roles: 
-  #- maven
-  #- jmeter
+  - maven
+  - jmeter
 
 - hosts: acceptanceVM
   become: true
   roles:
-  #- selenium
+  - selenium
 
 
 
