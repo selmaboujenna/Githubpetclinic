@@ -25,7 +25,7 @@
 
   - name: run jmeter test
     shell:
-      cmd: /opt/apache-jmeter-5.6.3/bin/jmeter.sh -n -t /opt/temp/Loadtesting-petclinic.jmx -l test-result.jtl
+      cmd: /opt/apache-jmeter-5.6.3/bin/jmeter.sh -n -t /home/adminuser/Githubpetclinic/Loadtesting-petclinic.jmx -l test-resultVM.jtl
 
   - name: adding tag
     shell:

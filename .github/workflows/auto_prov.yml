@@ -20,10 +20,10 @@ jobs:
       working-directory: /home/adminuser
     - name: initialize terraform
       run: terraform init
-      working-directory: /home/adminuser/temp/terraform
+      working-directory: /home/adminuser/Githubpetclinic/terraform
     - name: create VMs
       run: terraform apply --auto-approve
-      working-directory: /home/adminuser/temp/terraform
+      working-directory: /home/adminuser/Githubpetclinic/terraform
   
   configure:
     needs: build
@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v4
     - name: run playbook
       run: ansible-playbook -i inventory playbook.yml --vault-password-file /tmp/vault_pass.txt
-      working-directory: /home/adminuser/temp/ansible_quickstart
+      working-directory: /home/adminuser/Githubpetclinic/ansible_quickstart
     - name: verwijder vault pass
       run: rm /tmp/vault_pass.txt
 
@@ -47,12 +47,12 @@ jobs:
       uses: actions/checkout@v4
     - name: run playbook for testingVM
       run: ansible-playbook -i inventory testing.yml
-      working-directory: /home/adminuser/temp/ansible_quickstart
+      working-directory: /home/adminuser/Githubpetclinic/ansible_quickstart
     - name: upload test results
       uses: actions/upload-artifact@v4
       with:
         name: test-result
-        path: /home/adminuser/temp/test-result.jtl
+        path: /home/adminuser/Githubpetclinic/test-result.jtl
     
 
   acceptance:
@@ -61,7 +61,7 @@ jobs:
     steps:
     - name: run playbook for acceptanceVM
       run: ansible-playbook -i inventory acceptance.yml -v
-      working-directory: /home/adminuser/temp/ansible_quickstart
+      working-directory: /home/adminuser/Githubpetclinic/ansible_quickstart
     
 
   production:
@@ -70,7 +70,7 @@ jobs:
     steps:
       - name: run playbook for productionVM
         run: ansible-playbook -i inventory production.yml
-        working-directory: /home/adminuser/temp/ansible_quickstart
+        working-directory: /home/adminuser/Githubpetclinic/ansible_quickstart
 
   complete:
     needs: production
@@ -78,8 +78,11 @@ jobs:
     steps:
       - name: delete testingVM
         run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[0] --auto-approve
-        working-directory: /home/adminuser/temp/terraform
+        working-directory: /home/adminuser/Githubpetclinic/terraform
       - name: delete acceptanceVM
         run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[1] --auto-approve
-        working-directory: /home/adminuser/temp/terraform
+        working-directory: /home/adminuser/Githubpetclinic/terraform
+      - name: delete repo
+        run: rm -r Githubpetclinic
+        working-directory: /home/adminuser
 
