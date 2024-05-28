@@ -135,7 +135,7 @@ locals {
 }
 
 resource "local_file" "ansible" {
-  filename = "/home/adminuser/temp/ansible_quickstart/inventory"
+  filename = "/home/adminuser/Githubpetclinic/ansible_quickstart/inventory"
   content = <<-EOT
   ${local.testingVM}
   ${data.azurerm_public_ip.provisioning_public_ip.ip_address} ansible_user=adminuser
