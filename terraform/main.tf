@@ -11,6 +11,13 @@ terraform {
 
   required_version = ">= 0.13.4"
 
+    backend "azurerm" {
+    resource_group_name  = "boujenna_selma-rg"
+    storage_account_name = "prov123"
+    container_name       = "storagecontainer"
+    key                  = "terraform.tfstate"
+  }
+
 }
 
 provider "azurerm" {
