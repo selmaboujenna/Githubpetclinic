@@ -20,10 +20,10 @@ jobs:
       working-directory: /home/adminuser
     - name: initialize terraform
       run: terraform init
-      working-directory: /home/adminuser/terraform
+      working-directory: /home/adminuser/Githubpetclinic/terraform
     - name: create VMs
       run: terraform apply --auto-approve
-      working-directory: /home/adminuser/terraform
+      working-directory: /home/adminuser/Githubpetclinic/terraform
   
   configure:
     needs: build
