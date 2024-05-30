@@ -8,7 +8,7 @@ def test_website():
     driver = webdriver.Firefox(options=options)
     driver.get("http://localhost:8080/petclinic/")
 
-    CSS_selectors = ["#main-nar > ul > li.active", "#main-navbar > ul > li:nth-child(2)", "#main-navbar > ul > li:nth-child(3)","#main-navbar > ul > li:nth-child(4)"]
+    CSS_selectors = ["#main-navbar > ul > li.active", "#main-navbar > ul > li:nth-child(2)", "#main-navbar > ul > li:nth-child(3)","#main-navbar > ul > li:nth-child(4)"]
 
     title = driver.title
     print(driver.title)
