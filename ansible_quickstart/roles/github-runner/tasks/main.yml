@@ -34,7 +34,7 @@
   become_user: selmaboujenna
   shell:
    chdir: /home/adminuser/actions-runner
-   cmd: "./config.sh --url https://github.com/selmaboujenna/Githubpetclinic --token BHTMG3BEZNZXFPSRMYRI6ZLGI4UNK --unattended" 
+   cmd: "./config.sh --url https://github.com/selmaboujenna/Githubpetclinic --token BHTMG3HVYYKBYDDW4INNXJLGMGIK6--unattended" 
 
 - name: change permissions
   command: "chmod -R 777 /home/adminuser/actions-runner/svc.sh"

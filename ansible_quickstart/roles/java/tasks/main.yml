@@ -10,7 +10,7 @@
     state: present
     line: "{{item}}"
   with_items:
-    - 'export JAVA_HOME="/usr/lib64/jvm/java-11-openjdk-11'
+    - 'export JAVA_HOME="/usr/lib64/jvm/java-11-openjdk-11"'
     - 'export PATH=$PATH:$JAVA_home/bin'
 
 

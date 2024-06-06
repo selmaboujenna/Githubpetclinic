@@ -1,0 +1,17 @@
+- name: maak een directory
+  file:
+    path: /elk
+    state: directory
+    mode: 0777
+
+- name: logstash downloaden
+  get_url:
+    url: "https://artifacts.elastic.co/downloads/logstash/logstash-8.13.4-linux-x86_64.tar.gz"
+    dest: /elk/logstash-8.13.4-linux-x86_64
+    mode: 0755
+
+- name: extract logstash
+  unarchive:
+    src: /elk/logstash-8.13.4-linux-x86_64
+    dest: /elk
+    remote_src: yes
