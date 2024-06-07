@@ -1,7 +1,6 @@
 ---
 
 - hosts: all
-  become: true
+  become: false
   roles:
-  - ansible
-  - terraform
+  - elk

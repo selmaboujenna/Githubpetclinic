@@ -1,0 +1,28 @@
+- name: maak een directory
+  file:
+    path: /data
+    user: adminuser
+    group: users
+    state: directory
+    mode: 0755
+
+- name: install filebeat
+  get_url:
+    url: "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.14.0-linux-x86_64.tar.gz"
+    src: /data/filebeat-8.14.0-linux-x86_64.tar.gz
+    dest: /data
+    mode: 0755
+
+- name: extract filebeat
+  unarchive:
+    src: /data/filebeat-8.14.0
+    dest: /data
+    remote_src: yes
+
+- name: permissions
+  become: true   
+  file:
+    path: /data/filebeat-8.14.0
+    owner: adminuser
+    group: users
+    mode: 0755

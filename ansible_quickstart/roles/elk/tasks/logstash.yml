@@ -15,3 +15,31 @@
     src: /elk/logstash-8.13.4-linux-x86_64
     dest: /elk
     remote_src: yes
+
+- name: permissions
+  become: true
+  file:
+    path: /elk/logstash-8.13.4/config/startup.options
+    owner: adminuser
+    group: users
+    mode: 0755
+
+- name: maak logstash.service voor systemd
+  become: true
+  shell: 
+     cmd: /elk/logstash-8.13.4/bin/system-install /elk/logstash-8.13.4/config/startup.options systemd
+     creates: /etc/systemd/system/logstash.service
+
+- name: force systemd reload
+  become: true
+  systemd:
+    daemon_reload: yes
+
+- name: Start the logstash service
+  become: true
+  service:
+    name: logstash
+    state: started
+    enabled: yes
+
+

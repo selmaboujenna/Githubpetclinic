@@ -1,0 +1,56 @@
+- name: elastic downloaden
+  get_url:
+    url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.14.0-linux-x86_64.tar.gz"
+    dest: /elk/elasticsearch-8.14.0-linux-x86_64
+    mode: 0755
+
+- name: extract elastic
+  unarchive:
+    src: /elk/elasticsearch-8.14.0-linux-x86_64
+    dest: /elk
+    remote_src: yes
+
+- name: maak een systemd service file
+  become: true
+  copy:
+    dest: /etc/systemd/system/elasticsearch.service
+    content: |
+      [Unit]
+      Description=Elasticsearch
+      Documentation=https://www.elastic.co
+      Wants=network-online.target
+      After=network-online.target
+
+      [Service]
+      Type=simple
+      User=adminuser
+      Group=users
+      ExecStart=/elk/elasticsearch-8.14.0/bin/elasticsearch
+      Restart=always
+      WorkingDirectory=/
+      LimitNOFILE=65535
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: permissions
+  become: true   
+  file:
+    path: /elk/elasticsearch-8.14.0-linux-x86_64
+    owner: adminuser
+    group: users
+    mode: 0755
+
+- name: systemd reload
+  become: true
+  systemd:
+    daemon_reload: yes
+  
+- name: start elastic service
+  become: true
+  systemd:
+    name: elasticsearch.service
+    enabled: yes
+    state: started
+
+
