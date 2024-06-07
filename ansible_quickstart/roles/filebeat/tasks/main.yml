@@ -1,7 +1,7 @@
 - name: maak een directory
   file:
     path: /data
-    user: adminuser
+    owner: adminuser
     group: users
     state: directory
     mode: 0755
