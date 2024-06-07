@@ -15,7 +15,7 @@
 
 - name: extract filebeat
   unarchive:
-    src: /data/filebeat-8.14.0
+    src: /data/filebeat-8.14.0-linux-x86_64.tar.gz
     dest: /data
     remote_src: yes
 
