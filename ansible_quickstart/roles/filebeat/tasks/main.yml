@@ -22,7 +22,7 @@
 - name: permissions
   become: true   
   file:
-    path: /data/filebeat-8.14.0
+    path: /data/filebeat-8.14.0-linux-x86_64
     owner: adminuser
     group: users
     mode: 0755
