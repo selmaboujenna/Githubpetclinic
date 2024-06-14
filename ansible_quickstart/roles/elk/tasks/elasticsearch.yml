@@ -1,56 +1,52 @@
-- name: elastic downloaden
-  get_url:
-    url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.14.0-linux-x86_64.tar.gz"
-    dest: /elk/elasticsearch-8.14.0-linux-x86_64
-    mode: 0755
+- name: importeer gpg key
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
-- name: extract elastic
-  unarchive:
-    src: /elk/elasticsearch-8.14.0-linux-x86_64
-    dest: /elk
-    remote_src: yes
-
-- name: maak een systemd service file
+- name: add elk repo
   become: true
   copy:
-    dest: /etc/systemd/system/elasticsearch.service
+    dest: /etc/zypp/repos.d/elasticsearch.repo
     content: |
-      [Unit]
-      Description=Elasticsearch
-      Documentation=https://www.elastic.co
-      Wants=network-online.target
-      After=network-online.target
+      [elasticsearch]
+      name=Elasticsearch repository for 8.x packages
+      baseurl=https://artifacts.elastic.co/packages/8.x/yum
+      gpgcheck=1
+      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      enabled=0
+      autorefresh=1
+      type=rpm-md
 
-      [Service]
-      Type=simple
-      User=adminuser
-      Group=users
-      ExecStart=/elk/elasticsearch-8.14.0/bin/elasticsearch
-      Restart=always
-      WorkingDirectory=/
-      LimitNOFILE=65535
+- name: enable repo
+  become: true
+  shell:
+    cmd: zypper modifyrepo --enable elasticsearch
 
-      [Install]
-      WantedBy=multi-user.target
+- name: installeer elastic
+  become: true
+  community.general.zypper:
+    name: elasticsearch
+    state: latest
+    update_cache: yes
 
 - name: permissions
   become: true   
   file:
-    path: /elk/elasticsearch-8.14.0-linux-x86_64
+    path: /etc/elasticsearch
     owner: adminuser
     group: users
     mode: 0755
-
+  
 - name: systemd reload
   become: true
   systemd:
     daemon_reload: yes
   
-- name: start elastic service
+- name: start elasticsearch service
   become: true
   systemd:
     name: elasticsearch.service
     enabled: yes
     state: started
-
 

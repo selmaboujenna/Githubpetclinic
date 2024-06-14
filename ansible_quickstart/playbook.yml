@@ -12,7 +12,7 @@
   # - tomcat
   # - github-runner
   # - java 
-  - filebeat
+  #- filebeat
   - git 
 
 - hosts: testingVM

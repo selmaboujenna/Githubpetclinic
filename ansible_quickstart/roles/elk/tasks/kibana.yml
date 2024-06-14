@@ -1,41 +1,14 @@
-- name: kibana downloaden
-  get_url:
-    url: https://artifacts.elastic.co/downloads/kibana/kibana-8.14.0-linux-x86_64.tar.gz
-    dest: /elk/kibana-8.14.0-linux-x86_64
-    mode: 0755
-
-- name: extract kibana
-  unarchive:
-    src: /elk/kibana-8.14.0-linux-x86_64
-    dest: /elk
-    remote_src: yes
-
-- name: maak een systemd service file
+- name: installeer kibana
   become: true
-  copy:
-    dest: /etc/systemd/system/kibana.service
-    content: |
-      [Unit]
-      Description=Kibana
-      Documentation=https://www.elastic.co/guide/en/kibana/current/index.html
-      Wants=network-online.target
-      After=network-online.target
-
-      [Service]
-      Type=simple
-      User=adminuser
-      Group=users
-      ExecStart=/elk/kibana-8.14.0/bin/kibana
-      Restart=always
-      WorkingDirectory=/
-
-      [Install]
-      WantedBy=multi-user.target
+  community.general.zypper:
+    name: kibana
+    state: latest
+    update_cache: yes
 
 - name: permissions
   become: true   
   file:
-    path: /elk/kibana-8.14.0
+    path: /etc/kibana
     owner: adminuser
     group: users
     mode: 0755

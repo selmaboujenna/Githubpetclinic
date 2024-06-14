@@ -19,6 +19,29 @@
     dest: /data
     remote_src: yes
 
+- name: maak een systemd service file
+  become: true
+  copy:
+    dest: /etc/systemd/system/filebeat.service
+    content: |
+      [Unit]
+      Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
+      Documentation=https://www.elastic.co/products/beats/filebeat
+      Wants=network-online.target
+      After=network-online.target
+
+      [Service]
+      Environment="BEAT_LOG_OPTS="
+      Environment="BEAT_CONFIG_OPTS=-c /data/filebeat-8.14.0-linux-x86_64/filebeat.yml"
+      Environment="BEAT_PATH_OPTS=-path.home /data/filebeat-8.14.0-linux-x86_64 -path.config /data/filebeat-8.14.0-linux-x86_64 -path.data /data/filebeat-8.14.0-linux-x86_64/data -path.logs /data/filebeat-8.14.0-linux-x86_64/logs"
+      ExecStart=/data/filebeat-8.14.0-linux-x86_64/filebeat $BEAT_LOG_OPTS $BEAT_CONFIG_OPTS $BEAT_PATH_OPTS
+      Restart=always
+      User=root
+      Group=root
+
+      [Install]
+      WantedBy=multi-user.target
+
 - name: permissions
   become: true   
   file:
@@ -26,3 +49,15 @@
     owner: adminuser
     group: users
     mode: 0755
+
+- name: systemd reload
+  become: true
+  systemd:
+    daemon_reload: yes
+  
+- name: start filebeatcd
+  become: true
+  systemd:
+    name: filebeat.service
+    enabled: yes
+    state: started
