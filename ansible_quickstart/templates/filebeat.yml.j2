@@ -19,8 +19,14 @@ filebeat.inputs:
 # Below are the input-specific configurations.
 
 # filestream is an input for collecting log messages from files.
-- type: log
-
+- type: docker
+  container.ids:'*'
+  container.paths: 
+    - /var/lib/docker/*/*.log
+  
+  json.keys_under_root: true
+  json.add_error_key: true
+  json.message_key: log
   # Unique ID among all inputs, an ID is required.
  # id: my-filestream-id
 
@@ -29,7 +35,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /var/log/zypper.log
+    #- /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
