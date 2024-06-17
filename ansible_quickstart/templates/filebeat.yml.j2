@@ -20,8 +20,8 @@ filebeat.inputs:
 
 # filestream is an input for collecting log messages from files.
 - type: docker
-  container.ids:'*'
-  container.paths: 
+  containers.ids:'*'
+  containers.paths: 
     - /var/lib/docker/*/*.log
   
   json.keys_under_root: true
