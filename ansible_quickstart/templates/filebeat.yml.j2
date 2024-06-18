@@ -2,6 +2,8 @@ filebeat.inputs:
   - type: container
     paths:
      - '/var/lib/docker/containers/*/*.log'
+    fields:
+      application: tomcat
     
     json.keys_under_root: true
     json.add_error_key: true
