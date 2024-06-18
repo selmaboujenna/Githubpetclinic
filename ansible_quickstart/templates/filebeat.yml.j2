@@ -22,4 +22,9 @@ processors:
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
 
+  - decode_json_fields:
+          fields: ["message"]
+          target: ""
+          overwrite_keys: true
+
 logging.level: info
