@@ -5,6 +5,7 @@ filebeat.inputs:
     fields:
       application: tomcat
     fields_under_root: yes
+    include_lines: ['^ERR', '^WARN']
     
     json.keys_under_root: true
     json.add_error_key: true
