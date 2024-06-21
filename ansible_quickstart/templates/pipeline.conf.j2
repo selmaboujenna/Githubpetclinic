@@ -1,0 +1,25 @@
+input {
+    beats {
+        port => 5044
+    }
+}
+
+filter {
+}
+
+output {
+    elasticsearch {
+        hosts => ["https://10.0.0.4:9200"]
+	index => "filebeat-%{+YYYY.MM.dd}"
+        user => "elastic"
+        password => "envelop"
+        ssl_enabled => true
+        ssl_certificate_authorities => "/etc/logstash/certs/http_ca.crt"
+    }
+
+    stdout {
+        codec => rubydebug
+    }
+}
+
+

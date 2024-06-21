@@ -13,6 +13,13 @@
     group: users
     mode: 0755
 
+- name: template files
+  become: true
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    mode: 0600
+
 - name: systemd reload
   become: true
   systemd:

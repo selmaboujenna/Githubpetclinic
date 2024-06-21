@@ -2,5 +2,7 @@
 
 - hosts: all
   become: false
+  vars_files:
+    - elastic.yml
   roles:
   - elk
