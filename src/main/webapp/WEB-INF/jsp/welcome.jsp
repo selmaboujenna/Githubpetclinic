@@ -4,7 +4,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="home">
-    <h2><fmt:message key="Bedankt voor jullie aandacht!"/></h2>
+    <h2><fmt:message key="bedankt voor jullie aandacht"/></h2>
     <div class="row">
         <div class="col-md-12">
             <spring:url value="/resources/images/suprise.png" htmlEscape="true" var="petsImage"/>
