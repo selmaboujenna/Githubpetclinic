@@ -4,10 +4,10 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="home">
-    <h2><fmt:message key="welcome"/></h2>
+    <h2><fmt:message key="Bedankt voor jullie aandacht!"/></h2>
     <div class="row">
         <div class="col-md-12">
-            <spring:url value="/resources/images/surprise.png" htmlEscape="true" var="petsImage"/>
+            <spring:url value="/resources/images/suprise.png" htmlEscape="true" var="petsImage"/>
             <img class="img-responsive" alt="A cat and a dog" src="${petsImage}"/>
         </div>
     </div>
