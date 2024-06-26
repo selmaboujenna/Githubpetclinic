@@ -20,3 +20,7 @@
     shell:
       chdir: /opt/temp
       cmd: pytest Selenium-pets.py
+
+  - name: curl petclinic
+    shell: 
+      cmd: curl http://localhost:8080/petclinic/oups

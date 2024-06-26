@@ -72,17 +72,17 @@ jobs:
         run: ansible-playbook -i inventory production.yml
         working-directory: /home/adminuser/Githubpetclinic/ansible_quickstart
 
-  # complete:
-  #   needs: production
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: delete testingVM
-  #       run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[0] --auto-approve
-  #       working-directory: /home/adminuser/Githubpetclinic/terraform
-  #     - name: delete acceptanceVM
-  #       run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[1] --auto-approve
-  #       working-directory: /home/adminuser/Githubpetclinic/terraform
-  #     - name: delete repo
-  #       run: rm -r Githubpetclinic
-  #       working-directory: /home/adminuser
+  complete:
+    needs: production
+    runs-on: self-hosted
+    steps:
+      - name: delete testingVM
+        run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[0] --auto-approve
+        working-directory: /home/adminuser/Githubpetclinic/terraform
+      - name: delete acceptanceVM
+        run: terraform destroy --target azurerm_linux_virtual_machine.linux_vm[1] --auto-approve
+        working-directory: /home/adminuser/Githubpetclinic/terraform
+      - name: delete repo
+        run: rm -r Githubpetclinic
+        working-directory: /home/adminuser
 
