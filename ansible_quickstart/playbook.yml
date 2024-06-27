@@ -9,6 +9,7 @@
   roles: 
   - docker 
   - filebeat
+  - git
 
 - hosts: testingVM
   become: true
